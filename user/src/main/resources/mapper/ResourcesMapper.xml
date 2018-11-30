@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bar.user.mapper.ResourcesMapper">
+  <resultMap id="BaseResultMap" type="com.bar.user.bean.Resources">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="grant_key" jdbcType="VARCHAR" property="grantKey" />
+    <result column="page_url" jdbcType="VARCHAR" property="pageUrl" />
+    <result column="seq" jdbcType="INTEGER" property="seq" />
+    <result column="resource_type" jdbcType="INTEGER" property="resourceType" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from resources
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bar.user.bean.Resources">
+    insert into resources (id, name, grant_key,
+      page_url, seq, resource_type, 
+      icon, parent_id)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{grantKey,jdbcType=VARCHAR}, 
+      #{pageUrl,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER}, #{resourceType,jdbcType=INTEGER}, 
+      #{icon,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bar.user.bean.Resources">
+    update resources
+    set name = #{name,jdbcType=VARCHAR},
+      grant_key = #{grantKey,jdbcType=VARCHAR},
+      page_url = #{pageUrl,jdbcType=VARCHAR},
+      seq = #{seq,jdbcType=INTEGER},
+      resource_type = #{resourceType,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, name, grant_key, page_url, seq, resource_type, icon, parent_id
+    from resources
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, grant_key, page_url, seq, resource_type, icon, parent_id
+    from resources
+  </select>
+  <select id="findByObject" resultMap="BaseResultMap">
+    select id, name, grant_key, page_url, seq, resource_type, icon, parent_id
+    from resources
+    <where>
+      <if test="id != null">
+        and id = #{id}
+      </if>
+      <if test="name != null and name != ''">
+        and name = #{name}
+      </if>
+      <if test="grantKey != null and grantKey != ''">
+        and grant_key = #{grantKey}
+      </if>
+    </where>
+  </select>
+</mapper>
