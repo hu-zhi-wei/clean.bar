@@ -2,7 +2,7 @@ package com.bar.common.number;
 
 import java.util.HashSet;
 
-public class IdWorker {
+public class  IdWorker {
 
     private final long workerId;
     private final static long twepoch = 1361753741828L;
